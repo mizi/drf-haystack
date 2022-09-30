@@ -11,20 +11,11 @@ jobs:
       matrix:
         python-version: [ '3.7', '3.8', '3.9', '3.10', 'pypy3' ]
         django-version: [ '3.2', '4.0', '4.1' ]
-        es-version: [ '1.7', '2.x', '5.x', '7.x' ]
+        es-version: [ '1', '2', '5', '7' ]
 
     services:
       elasticsearch:
-        image: ubuntu:xenial
-        run:
-          # See https://www.elastic.co/guide/en/elasticsearch/reference/current/deb.html#deb-repo
-          - >
-            sudo apt-get update && apt-get install apt-transport-https
-            wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
-            echo "deb https://artifacts.elastic.co/packages/${ES_VERSION}/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic.list
-            sudo apt-get update && apt-get -y --allow-downgrades install elasticsearch
-            sudo service elasticsearch restart
-
+        image: elasticsearch:${{ matrix.es-version }}-alpine
         env:
           ES_VERSION: ${{ matrix.es-version }}
         ports:
