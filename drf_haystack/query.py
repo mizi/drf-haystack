@@ -94,7 +94,7 @@ class FilterQueryBuilder(BaseQueryBuilder):
         same param are found.
 
         :param str param: is the param for which you want to get the operator
-        :return: Either operator.or_ or operator.and_
+        :return: Either ``operator.or_`` or ``operator.and_``
         """
         return self.default_same_param_operator
 
@@ -107,7 +107,7 @@ class FilterQueryBuilder(BaseQueryBuilder):
         querystring parameters that are not registered in `view.fields` will be ignored.
 
         :param dict[str, list[str]] filters: is an expanded QueryDict or a mapping of keys to a list of
-        parameters.
+            parameters.
         """
 
         applicable_filters = []
@@ -175,7 +175,7 @@ class FacetQueryBuilder(BaseQueryBuilder):
 
         :param view: API View
         :param dict[str, list[str]] filters: is an expanded QueryDict or a mapping
-        of keys to a list of parameters.
+            of keys to a list of parameters.
         """
         field_facets = {}
         date_facets = {}

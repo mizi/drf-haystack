@@ -106,14 +106,14 @@ Changelog
 =========
 
 v1.8.11
-------
+-------
 *Release date: 2022-08-20*
 
     - Updated supported Django-Haystack versions
 
 
 v1.8.10
-------
+-------
 *Release date: 2021-04-12*
 
     - Updated supported Django versions

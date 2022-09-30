@@ -76,7 +76,7 @@ version = release = get_version(os.path.join('..', 'drf_haystack'))
 #
 # This is also used if you do content translation via gettext catalogs.
 # Usually you set "language" from the command line for these cases.
-language = None
+language = "en"
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
@@ -165,14 +165,14 @@ texinfo_documents = [
 
 # Example configuration for intersphinx: refer to the Python standard library.
 intersphinx_mapping = {
-    'http://docs.python.org/': None,
+    'https://docs.python.org/3/': None,
     'django': ('https://django.readthedocs.io/en/latest/', None),
     'haystack': ('https://django-haystack.readthedocs.io/en/latest/', None)
 }
 
 # Configurations for extlinks
 extlinks = {
-    'drf-pr': ('https://github.com/rhblind/drf-haystack/pull/%s', 'PR#'),
-    'drf-issue': ('https://github.com/rhblind/drf-haystack/issues/%s', '#'),
-    'haystack-issue': ('https://github.com/django-haystack/django-haystack/issues/%s', '#')
+    'drf-pr': ('https://github.com/rhblind/drf-haystack/pull/%s', 'PR#%s'),
+    'drf-issue': ('https://github.com/rhblind/drf-haystack/issues/%s', '#%s'),
+    'haystack-issue': ('https://github.com/django-haystack/django-haystack/issues/%s', '#%s')
 }
