@@ -19,7 +19,7 @@ jobs:
 
     services:
       elasticsearch:
-        image: elasticsearch:${{ matrix.es-version }}-alpine
+        image: elasticsearch:${{ matrix.es-version }}
         ports:
           - 9200
 
