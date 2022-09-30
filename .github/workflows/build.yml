@@ -1,23 +1,25 @@
 name: Test
 
-on: [ push, pull_request ]
+on:
+  pull_request:
+  push:
+    branches:
+      - master
 
 jobs:
   build:
-    name: build (Python ${{ matrix.python-version }}, Django ${{ matrix.django-version }})
+    name: build (Python ${{ matrix.python-version }}, Django ${{ matrix.django-version }}), ElasticSearch ${{ matrix.es-version }}
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
         python-version: [ '3.7', '3.8', '3.9', '3.10', 'pypy3' ]
         django-version: [ '3.2', '4.0', '4.1' ]
-        es-version: [ '1', '2', '5', '7' ]
+        es-version: [ '1-alpine', '2-alpine', '5-alpine', '7.17.6' ]
 
     services:
       elasticsearch:
         image: elasticsearch:${{ matrix.es-version }}-alpine
-        env:
-          ES_VERSION: ${{ matrix.es-version }}
         ports:
           - 9200
 
@@ -45,14 +47,14 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           python -m pip install --upgrade tox tox-gh-actions
+      - name: Set version variables
+        id: set-versions
+        run: |
+          es_version="${{ matrix.es-version }}"
+          echo "::set-output name=es::${es_version:0:1}"
       - name: Tox tests
         run: |
           tox -v
         env:
           DJANGO_VERSION: ${{ matrix.django-version }}
-          ES_VERSION: ${{ matrix.django-version }}
-
-      - name: Upload coverage
-        uses: codecov/codecov-action@v1
-        with:
-          name: Python ${{ matrix.python-version }}
+          ES_VERSION: ${{ steps.set-versions.outputs.es }}
