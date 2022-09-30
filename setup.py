@@ -18,6 +18,7 @@ def get_version(package):
     init_py = open(os.path.join(package, "__init__.py")).read()
     return re.search("__version__ = ['\"]([^'\"]+)['\"]", init_py).group(1)
 
+
 setup(
     name="drf-haystack",
     version=get_version("drf_haystack"),
@@ -33,17 +34,12 @@ setup(
     ],
     include_package_data=True,
     install_requires=[
-        "Django>=2.2,<=4.1",
-        "djangorestframework>=3.7,<3.13",
+        "Django>=2.2,<4.2",
+        "djangorestframework>=3.7,<3.15",
         "django-haystack>=2.8,<=3.2",
         "python-dateutil"
     ],
-    tests_require=[
-        "nose",
-        "coverage"
-    ],
     zip_safe=False,
-    test_suite="tests.run_tests.start",
     classifiers=[
         "Operating System :: OS Independent",
         "Development Status :: 5 - Production/Stable",

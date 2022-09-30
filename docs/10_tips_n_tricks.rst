@@ -12,6 +12,7 @@ use the ``instance.object`` instead of the search result instance.  As a conveni
 does just that.
 
 .. class:: drf_haystack.serializers.HaystackSerializerMixin
+    :noindex:
 
 An example using the mixin might look like the following:
 

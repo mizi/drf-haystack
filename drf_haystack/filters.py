@@ -31,6 +31,7 @@ class BaseHaystackFilterBackend(BaseFilterBackend):
         :param queryset: queryset to filter
         :param applicable_filters: filters which are passed directly to queryset.filter()
         :param applicable_exclusions: filters which are passed directly to queryset.exclude()
+
         :returns filtered queryset
         """
         if applicable_filters:
@@ -194,7 +195,7 @@ class HaystackFacetFilter(BaseHaystackFilterBackend):
     parsed by the ``python-dateutil.parser()`` which can handle most date formats.
 
     Query parameters is parsed in the following format:
-      ?field1=option1:value1,option2:value2&field2=option1:value1,option2:value2
+    ?field1=option1:value1,option2:value2&field2=option1:value1,option2:value2
     where each options ``key:value`` pair is separated by the ``view.lookup_sep`` attribute.
     """
 

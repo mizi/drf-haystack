@@ -112,11 +112,22 @@ LOGGING = {
     },
 }
 
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
 try:
     import elasticsearch
-    if (2, ) <= elasticsearch.VERSION <= (3, ):
-        HAYSTACK_CONNECTIONS['default'].update({
-            'ENGINE': 'haystack.backends.elasticsearch2_backend.Elasticsearch2SearchEngine'
-        })
+
+    if (1, 0, 0) <= elasticsearch.VERSION < (2, 0, 0):
+        es_engine = "haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine"
+    elif (2, 0, 0) <= elasticsearch.VERSION < (3, 0, 0):
+        es_engine = "haystack.backends.elasticsearch2_backend.Elasticsearch2SearchEngine"
+    elif (5, 0, 0) <= elasticsearch.VERSION < (6, 0, 0):
+        es_engine = "haystack.backends.elasticsearch5_backend.Elasticsearch5SearchEngine"
+    else:
+        es_engine = "haystack.backends.elasticsearch7_backend.Elasticsearch7SearchEngine"
+
+    HAYSTACK_CONNECTIONS['default'].update({
+        'ENGINE': es_engine
+    })
 except ImportError as e:
     del HAYSTACK_CONNECTIONS['default']  # This will intentionally cause everything to break!
