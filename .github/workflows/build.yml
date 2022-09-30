@@ -21,7 +21,7 @@ jobs:
       elasticsearch:
         image: elasticsearch:${{ matrix.es-version }}
         ports:
-          - 9200
+          - 9200:9200
 
     steps:
       - uses: actions/checkout@v2
@@ -56,6 +56,5 @@ jobs:
         run: |
           tox -v
         env:
-          ELASTICSEARCH_URL: http://127.0.0.1:9200/
           DJANGO_VERSION: ${{ matrix.django-version }}
           ES_VERSION: ${{ steps.set-versions.outputs.es }}
